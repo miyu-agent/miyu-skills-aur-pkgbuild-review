@@ -1,6 +1,7 @@
 [package]
-version = "0.1.0"
+version = "0.1.1"
 name = { en = "AUR package review", zh = "AUR 包审查" }
 summary = { en = "Check an AUR package for malicious or risky packaging before installing it", zh = "装 AUR 包之前查一遍有没有恶意或可疑的打包" }
 author = "SHORiN-KiWATA"
 icon = "package"
+logo = "logo.png"
