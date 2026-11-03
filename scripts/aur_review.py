@@ -569,14 +569,14 @@ def main():
             raise Failure("format 只有 md、json")
         if not package or not NAME.match(package):
             raise Failure("package 要写 AUR 包名，例：yay-bin")
-        cache = os.environ.get("MIYU_SCRIPT_CACHE_DIR")
+        cache = os.environ.get("MIYU_CACHE_DIR")
         if action == "collect":
             if cache:
                 dossier = collect(package, cache)
             else:
                 with tempfile.TemporaryDirectory() as tmp:
                     dossier = collect(package, tmp)
-                print("注意：没有缓存目录（MIYU_SCRIPT_CACHE_DIR），证据没存下，之后的 score 没法核实。\n")
+                print("注意：没有缓存目录（MIYU_CACHE_DIR），证据没存下，之后的 score 没法核实。\n")
             print(json.dumps(dossier, ensure_ascii=False) if fmt == "json" else render_dossier(dossier))
         else:
             path = dossier_path(cache, package) if cache else None
