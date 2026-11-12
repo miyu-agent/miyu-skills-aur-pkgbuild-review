@@ -8,4 +8,4 @@ jobs:
     permissions:
       contents: write
     with:
-      package: miyu-skills-aur-pkgbuild-review
+      package: aur-pkgbuild-review
