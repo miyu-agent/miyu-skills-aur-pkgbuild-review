@@ -62,6 +62,8 @@ MALICIOUS = {"remote_code_exec", "obfuscated_exec", "credential_access", "data_e
 SUSPICIOUS = {"impersonation", "upstream_mismatch", "srcinfo_mismatch", "suspicious_host",
               "risky_recent_change", "reviewer_manipulation", "hidden_logic"}
 HYGIENE = {"binary_repack", "unpinned_build_fetch", "weak_integrity", "system_change"}
+# 以主机为证据的类别：evidence 里的主机名都在证据里出现过就算核实；别的类别只认逐字。
+HOST_EVIDENCE = {"srcinfo_mismatch", "suspicious_host"}
 
 SPOTS = {
     "binary_repack": "装的是预编译好的程序，里面的代码没法逐行检查",
@@ -484,7 +486,7 @@ def score(args, dossier):
         ev = norm(f.get("evidence") or "")
         h = hosts(ev)
         f["verified"] = (f["origin"] == "pac" or (len(ev) >= 4 and ev in corpus)
-                         or (bool(h) and all(x in lower for x in h)))
+                         or (f["category"] in HOST_EVIDENCE and bool(h) and all(x in lower for x in h)))
         if f["verified"]:
             f["counted_tier"] = f["tier"]
         elif f["tier"] == "malicious":

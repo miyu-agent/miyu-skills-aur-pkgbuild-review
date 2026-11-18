@@ -73,7 +73,7 @@ Report each finding under exactly one category.
 
 ## Evidence rules
 
-- `evidence` must be copied exactly from a file, a `recent_changes` diff line (without the leading `+`/`-`), or a metadata value. One line, no paraphrase, no ellipsis. The tool checks it against what it collected: an unverifiable malicious finding is lowered to suspicious, any other unverifiable finding is discarded.
+- `evidence` must be copied exactly from a file, a `recent_changes` diff line (without the leading `+`/`-`), or a metadata value. One line, no paraphrase, no ellipsis. The tool checks it against what it collected: an unverifiable malicious finding is lowered to suspicious, any other unverifiable finding is discarded. Only for `suspicious_host` and `srcinfo_mismatch` the evidence may instead be the host or URL in question: it counts as verified when every host in it appears in the evidence.
 - One finding per distinct issue. Do not report the same line under several categories; pick the most specific one.
 - If something matches a category but is clearly legitimate in context, do not report it.
 - `intent`: 1-3 sentences on what the package installs, how (source build / binary repack / VCS), and where the code comes from. `summary` and `notes` are one line each, in plain language for a non-expert; at most 2 notes, only things the user should do or know before installing. Write them in the user's language; keep category names in English.
